@@ -1,0 +1,133 @@
+@font-face {
+    font-family: "Chikarayowaku";
+    src: url("../assets/fonts/851 Chikarayowaku.ttf") format(truetype);
+}
+
+html {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+    width: 75%;
+    overflow: hidden;
+    border-radius: 50px;
+    border: #ed7a38 solid 2px;
+
+        
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+
+.raden-container {
+    margin: auto;
+    height: 50vh;
+    width: 40vh;
+    position:absolute;
+    margin-top: 2em;
+}
+
+.raden-image {
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain;
+    z-index: 999;
+    outline-style: none;
+}
+
+.raden-image:hover {
+    cursor: pointer ;
+}
+
+.text-container {
+    position:absolute;
+    margin: auto;
+    z-index: -1;
+    height: 60vh;
+    width: 40vh;
+    text-align: center;
+    overflow: hidden;
+}
+
+.text-container::before {
+    content: ""; /* Required to display the pseudo-element */
+    position: absolute; /* Position it absolutely */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit; /* Inherit background color */
+    filter: blur(5px); /* Apply the blur */
+    z-index: -1; /* Send behind the text */
+}
+
+.text-el {
+    font-family: "Chikarayowaku";
+    font-size: 5em;
+    font-weight: 500;
+    line-height: 1em;
+    -webkit-text-stroke-width: 5px;
+    -webkit-text-stroke-color: rgb(238, 190, 157);
+    color: #72462c;
+    paint-order: stroke fill;
+}
+
+
+.spiral-img {
+    z-index: -999;
+    width: 150%;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    /* animation-play-state: paused; */
+}
+
+/*spinning animation */
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.spiral-animation {
+    animation-play-state: running;
+}
+
+.bottom-text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    width: 70%;
+}
+    .bottom-text a {
+        color: #ed7a38;
+        text-align: center;
+        text-decoration: none;
+    }
