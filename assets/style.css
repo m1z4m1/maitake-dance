@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Chikarayowaku";
-    src: url("../assets/fonts/851 Chikarayowaku.ttf") format(truetype);
+    src: url("../assets/fonts/851-Chikarayowaku.ttf") format(truetype);
 }
 
 html {
@@ -67,7 +67,7 @@ body {
     margin: auto;
     z-index: -1;
     height: 60vh;
-    width: 40vh;
+    width: 100%;
     text-align: center;
     overflow: hidden;
 }

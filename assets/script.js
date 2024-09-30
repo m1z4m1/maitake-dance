@@ -26,7 +26,7 @@ function radenAction() {
         radenAnimation("まいたけ<br>");
     }
     else if (ctr === 2) {
-        radenCharacter.src = "../assets/raden-r-1.png";
+        radenCharacter.src = "./assets/raden-r-1.png";
 
         playAudio(audioSecond);
         radenAnimation("ぐるぐる<br>");
@@ -42,33 +42,33 @@ function playAudio(src) {
 }
 
 function radenAnimation(text) {
-    radenCharacter.src = "../assets/raden-l-1.png";
+    radenCharacter.src = "./assets/raden-l-1.png";
     
     // Use timeouts and store their IDs in the array
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "../assets/raden-l-2.png";
+        radenCharacter.src = "./assets/raden-l-2.png";
         bigText.innerHTML = text;
         console.log("1");
     }, 120));
     
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "../assets/raden.png";
+        radenCharacter.src = "./assets/raden.png";
         console.log("2");
     }, 240));
 
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "../assets/raden-r-1.png";
+        radenCharacter.src = "./assets/raden-r-1.png";
         console.log("3");
         bigText.innerHTML += text;
     }, 360));
     
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "../assets/raden-r-2.png";
+        radenCharacter.src = "./assets/raden-r-2.png";
         console.log("4");
     }, 480));
 
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "../assets/raden.png";
+        radenCharacter.src = "./assets/raden.png";
         console.log("5");
     }, 600));
 
