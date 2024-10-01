@@ -2,13 +2,35 @@ const radenCharacter = document.querySelector(".raden-image");
 const audioMaitake1 = "./assets/audio/maitake-1.mp3";
 const audioGuru1 = "./assets/audio/guru-1.mp3";
 const audioGuruE = "./assets/audio/guru-end.mp3";
-
 const spiralImage = document.querySelector(".spiral-img");
-
 let bigText = document.querySelector(".text-el");
+
+const modalWindow = document.querySelector(".about-modal")
+const openModal = document.querySelector(".open-modal")
+const closeModal = document.querySelector(".close-modal")
+
 let ctr = 0;
 
 let timeouts = [];
+
+openModal.addEventListener("click", function() {
+    triggerModal(modalWindow);
+});
+closeModal.addEventListener("click", function() {
+    triggerModal(modalWindow);
+});
+
+
+function triggerModal(modal){
+    if(modal.style.display != "flex") {
+        modal.style.display = "flex";   
+    }
+    else {
+        modal.style.display = "none";
+    }
+
+}
+
 
 
 // Preload images
@@ -53,7 +75,6 @@ function radenAction() {
     clearAllTimeouts();
     radenCharacter.classList.remove("raden-spin-animation");
     ctr++;
-    let randomNumber = Math.floor(Math.random() * 10)
 
     if (ctr % 2 != 0) {
         playAudio(audioMaitake1);
@@ -61,7 +82,7 @@ function radenAction() {
         console.log(`_____${ctr}______`)
     }
     else if (ctr % 2 === 0) {
-        if (ctr % 8 === 0) {
+        if (ctr === 8) {
             radenCharacter.src = "assets/images/raden-f.png"
             radenCharacter.classList.add("raden-spin-animation");
             bigText.innerHTML = "";
@@ -70,13 +91,14 @@ function radenAction() {
                 radenCharacter.classList.remove("raden-spin-animation");
                 console.log("Spin stop");
             }, 720));
+            ctr = 0;
         }
         else {
             playAudio(audioGuru1);
             radenAnimation("ぐるぐる<br>");
             console.log(`_____${ctr}______`);
-    }
-        }   
+        }
+    }   
 
 }
 
@@ -92,33 +114,27 @@ function radenAnimation(text) {
     timeouts.push(setTimeout(function(){
         radenCharacter.src = "assets/images/raden-l-2.png";
         bigText.innerHTML = text;
-        console.log("1");
     }, 120));
     
     timeouts.push(setTimeout(function(){
         radenCharacter.src = "assets/images/raden.png";
-        console.log("2");
     }, 240));
 
     timeouts.push(setTimeout(function(){
         radenCharacter.src = "assets/images/raden-r-1.png";
-        console.log("3");
         bigText.innerHTML += text;
     }, 360));
     
     timeouts.push(setTimeout(function(){
         radenCharacter.src = "assets/images/raden-r-2.png";
-        console.log("4");
     }, 480));
 
     timeouts.push(setTimeout(function(){
         radenCharacter.src = "assets/images/raden.png";
-        console.log("5");
     }, 600));
 
     timeouts.push(setTimeout(function(){
         bigText.innerHTML = "";
-        console.log("6");
     }, 720));
 }
 
