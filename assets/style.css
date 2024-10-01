@@ -7,11 +7,14 @@ html {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: white;
+    background-color: rgb(237, 234, 236);
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;
+
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
 body {
@@ -34,7 +37,6 @@ body {
     overflow: hidden;
     border-radius: 50px;
     border: #ed7a38 solid 2px;
-
         
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
@@ -45,7 +47,7 @@ body {
 .raden-container {
     margin: auto;
     height: 50vh;
-    width: 40vh;
+
     position:absolute;
     margin-top: 2em;
 }
@@ -56,6 +58,11 @@ body {
     object-fit: contain;
     z-index: 999;
     outline-style: none;
+}
+
+.raden-spin-animation {
+    -webkit-animation: spin 0.3s linear infinite;
+    animation: spin 0.3s linear infinite;
 }
 
 .raden-image:hover {
@@ -70,6 +77,7 @@ body {
     width: 100%;
     text-align: center;
     overflow: hidden;
+
 }
 
 .text-container::before {
@@ -89,16 +97,19 @@ body {
     font-size: 5em;
     font-weight: 500;
     line-height: 1em;
-    -webkit-text-stroke-width: 5px;
-    -webkit-text-stroke-color: rgb(238, 190, 157);
     color: #72462c;
-    paint-order: stroke fill;
-}
 
+    text-shadow: 
+        -2px -2px 0 #e9d1c3,  
+        2px -2px 0 #e9d1c3,
+        -2px 2px 0 #e9d1c3,
+        2px 2px 0 #e9d1c3,
+        0 0 5px #e9d1c3;
+}
 
 .spiral-img {
     z-index: -999;
-    width: 150%;
+    width: 100vw;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
     /* animation-play-state: paused; */
@@ -115,10 +126,6 @@ body {
     to { transform: rotate(360deg); }
 }
 
-.spiral-animation {
-    animation-play-state: running;
-}
-
 .bottom-text {
     display: flex;
     align-items: center;
@@ -131,3 +138,35 @@ body {
         text-align: center;
         text-decoration: none;
     }
+
+
+@media only screen and (max-width: 600px) {
+    body {
+        background-color: rgba(173, 216, 230, 0.548);
+        width: 100%;
+    }
+
+    .container {
+        height: 80%;
+        width: 85%;
+        overflow: hidden;
+    }
+
+    .spiral-img {
+        z-index: -999;
+        width: 100vh;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+        /* animation-play-state: paused; */
+    }
+
+    .raden-container {
+        margin: auto;
+        height: 50vh;
+        width: auto;
+        position:absolute;
+        margin-top: 2em;
+    }
+
+
+}
