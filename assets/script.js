@@ -5,33 +5,14 @@ const audioGuruE = "./assets/audio/guru-end.mp3";
 const spiralImage = document.querySelector(".spiral-img");
 let bigText = document.querySelector(".text-el");
 
-const modalWindow = document.querySelector(".about-modal")
-const openModal = document.querySelector(".open-modal")
-const closeModal = document.querySelector(".close-modal")
+const loadingText = document.querySelector(".loading-text");
+const modalWindow = document.querySelector(".about-modal");
+const openModal = document.querySelector(".open-modal");
+const closeModal = document.querySelector(".close-modal");
 
 let ctr = 0;
 
 let timeouts = [];
-
-openModal.addEventListener("click", function() {
-    triggerModal(modalWindow);
-});
-closeModal.addEventListener("click", function() {
-    triggerModal(modalWindow);
-});
-
-
-function triggerModal(modal){
-    if(modal.style.display != "flex") {
-        modal.style.display = "flex";   
-    }
-    else {
-        modal.style.display = "none";
-    }
-
-}
-
-
 
 // Preload images
 const images = [
@@ -60,6 +41,11 @@ audioFiles.forEach(src => {
     aud.src = src;
 });
 
+
+window.addEventListener("load", function(){
+    loadingText.style.display = "none";
+    console.log("DONE")
+})
 
 
 //Interacting
@@ -143,3 +129,19 @@ function clearAllTimeouts() {
     timeouts = []; // Reset the array
 }
 
+openModal.addEventListener("click", function() {
+    triggerModal(modalWindow);
+});
+closeModal.addEventListener("click", function() {
+    triggerModal(modalWindow);
+});
+
+
+function triggerModal(modal){
+    if(modal.style.display != "flex") {
+        modal.style.display = "flex";   
+    }
+    else {
+        modal.style.display = "none";
+    }
+}

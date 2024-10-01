@@ -12,6 +12,7 @@ html {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    font-family: "Chikarayowaku";
     font-family: Arial, Helvetica, sans-serif;
 
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -125,27 +126,26 @@ body {
     to { transform: rotate(360deg); }
 }
 
-.bottom-text {
+.small-text {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
     width: 70%;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
-    .bottom-text a {
+    .small-text a, span {
         color: #ed7a38;
         text-align: center;
         text-decoration: none;
         display: flex;
         flex-direction: row;
-
         text-align: center;
         justify-content: center;
         align-items: center;
-
         height: 1.2em;
     }
-        .bottom-text a img {
+        .small-text a img {
             object-fit: contain;
             margin: auto;
             height: 1.2em;
@@ -153,6 +153,10 @@ body {
             -webkit-filter: invert(67%) sepia(36%) saturate(5964%) hue-rotate(340deg) brightness(101%) contrast(86%);
             margin-right: 0.5em;
         }
+
+    .small-text div {
+        display: flex;
+    }
 
 .about-modal {
     position: absolute;
