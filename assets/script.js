@@ -10,6 +10,11 @@ let ctr = 0;
 
 let timeouts = [];
 
+window.onload = function () {
+    console.log('Loaded');
+  }
+
+
 // Preload images
 const images = [
     "assets/images/raden.png",

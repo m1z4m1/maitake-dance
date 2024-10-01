@@ -112,7 +112,6 @@ body {
     width: 100vw;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
-    /* animation-play-state: paused; */
 }
 
 /*spinning animation */
@@ -142,7 +141,6 @@ body {
 
 @media only screen and (max-width: 600px) {
     body {
-        background-color: rgba(173, 216, 230, 0.548);
         width: 100%;
     }
 
@@ -157,7 +155,6 @@ body {
         width: 100vh;
         -webkit-animation: spin 2s linear infinite;
         animation: spin 2s linear infinite;
-        /* animation-play-state: paused; */
     }
 
     .raden-container {
