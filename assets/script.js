@@ -27,8 +27,8 @@ images.forEach(src => {
 });
 
 const audioFiles = [
-    ".assets/audio/maitake-1.mp3",
-    ".assets/audio/guru-1.mp3",
+    "assets/audio/maitake-1.mp3",
+    "assets/audio/guru-1.mp3",
     "assets/audio/guru-end.mp3",
 
 ];
@@ -42,9 +42,10 @@ audioFiles.forEach(src => {
 
 //Interacting
 radenCharacter.addEventListener("click", radenAction);
-radenCharacter.addEventListener("keydown", function(event){
-    if(event.code === "Space") {
-        radenAction();
+document.addEventListener('keydown', function(event) {
+    if (event.code === 'Space') {
+        event.preventDefault(); // Prevent scrolling down the page when space is pressed
+        radenAction(); // Call your function
     }
 });
 
