@@ -153,8 +153,13 @@ body {
         }
 
     .small-text div {
-        display: flex       ;
+        display: flex;
     }
+
+.click-counter-text {
+    text-align: center;
+
+}
 
 .about-modal {
     position: absolute;

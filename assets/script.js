@@ -3,6 +3,7 @@ const audioMaitake1 = "./assets/audio/maitake-1.mp3";
 const audioGuru1 = "./assets/audio/guru-1.mp3";
 const audioGuruE = "./assets/audio/guru-end.mp3";
 const spiralImage = document.querySelector(".spiral-img");
+
 let bigText = document.querySelector(".text-el");
 
 const loadingText = document.querySelector(".loading-text");
@@ -10,11 +11,18 @@ const modalWindow = document.querySelector(".about-modal");
 const openModal = document.querySelector(".open-modal");
 const closeModal = document.querySelector(".close-modal");
 
-let ctr = 0;
+let clickCounter = document.querySelector(".click-counter-text");
+let myClicksCounter = document.querySelector(".my-click-counter-text");
 
+let myClicks = 0;
+let ctr = 0;
 let timeouts = [];
 
-// Preload images
+//fetch yourClicks from localStorage
+myClicks = localStorage.getItem("myClicks");
+myClicksCounter.textContent = `You: ${myClicks}`;
+
+// Preload images and audio
 const images = [
     "assets/images/raden.png",
     "assets/images/raden-l-1.png",
@@ -42,9 +50,10 @@ audioFiles.forEach(src => {
 });
 
 
+
 window.addEventListener("load", function(){
     loadingText.style.display = "none";
-    console.log("DONE")
+    console.log("Load Done")
 })
 
 
@@ -65,7 +74,6 @@ function radenAction() {
     if (ctr % 2 != 0) {
         playAudio(audioMaitake1);
         radenAnimation("まいたけ<br>");
-        console.log(`_____${ctr}______`)
     }
     else if (ctr % 2 === 0) {
         if (ctr === 8) {
@@ -82,9 +90,13 @@ function radenAction() {
         else {
             playAudio(audioGuru1);
             radenAnimation("ぐるぐる<br>");
-            console.log(`_____${ctr}______`);
         }
     }   
+
+    myClicks++; //record your own clicks in localstorage
+    localStorage.setItem("myClicks", JSON.stringify(myClicks));
+    myClicksCounter.textContent = `You: ${myClicks}`;
+    console.log(myClicks)
 
 }
 
