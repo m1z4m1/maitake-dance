@@ -64,6 +64,7 @@ function radenAction() {
         if (ctr % 8 === 0) {
             radenCharacter.src = "assets/images/raden-f.png"
             radenCharacter.classList.add("raden-spin-animation");
+            bigText.innerHTML = "";
             playAudio(audioGuruE);
             timeouts.push(setTimeout(function(){
                 radenCharacter.classList.remove("raden-spin-animation");
