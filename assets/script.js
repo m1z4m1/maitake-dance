@@ -9,6 +9,21 @@ let ctr = 0;
 
 let timeouts = [];
 
+// Preload images
+const images = [
+    "assets/images/raden-l-1.png",
+    "assets/images/raden-l-2.png",
+    "assets/images/raden-r-1.png",
+    "assets/images/raden-r-2.png",
+    "assets/images/raden.png"
+];
+
+images.forEach(src => {
+    const img = new Image();
+    img.src = src;
+});
+
+//Interacting
 radenCharacter.addEventListener("click", radenAction);
 radenCharacter.addEventListener("keydown", function(event){
     if(event.code === "Space") {
@@ -26,14 +41,10 @@ function radenAction() {
         radenAnimation("まいたけ<br>");
     }
     else if (ctr === 2) {
-        // radenCharacter.src = "/images/raden-r-1.png";
-
         playAudio(audioSecond);
         radenAnimation("ぐるぐる<br>");
         ctr = 0;
-
     }
-    // spiralImage.classList.add("spiral-animation");
 }
 
 function playAudio(src) {
