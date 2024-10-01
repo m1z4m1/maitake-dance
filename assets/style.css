@@ -138,13 +138,19 @@ body {
         text-decoration: none;
         display: flex;
         flex-direction: row;
+
         text-align: center;
         justify-content: center;
+        align-items: center;
+
+        height: 1.2em;
     }
         .bottom-text a img {
+            object-fit: contain;
             margin: auto;
             height: 1.2em;
             filter: invert(67%) sepia(36%) saturate(5964%) hue-rotate(340deg) brightness(101%) contrast(86%);
+            -webkit-filter: invert(67%) sepia(36%) saturate(5964%) hue-rotate(340deg) brightness(101%) contrast(86%);
             margin-right: 0.5em;
         }
 
@@ -170,6 +176,10 @@ body {
     .about-modal span {
         margin-top: 0.5em;
         margin-bottom: 0.5em;
+        color: #ed7a38;
+    }
+
+    .about-modal span a {
         color: #ed7a38;
     }
 
