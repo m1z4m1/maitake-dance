@@ -69,9 +69,6 @@ document.addEventListener('keydown', function(event) {
 function radenAction() {
     clearAllTimeouts();
     radenCharacter.classList.remove("raden-spin-animation");
-
-    totalClicks++;
-    
     
     ctr++; //For knowing which audio/animation to play
 
