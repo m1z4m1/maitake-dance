@@ -155,7 +155,7 @@ body {
         }
 
     .small-text div {
-        display: flex;
+        display: flex       ;
     }
 
 .about-modal {
