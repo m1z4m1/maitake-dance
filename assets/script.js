@@ -62,14 +62,18 @@ radenCharacter.addEventListener("click", radenAction);
 document.addEventListener('keydown', function(event) {
     if (event.code === 'Space') {
         event.preventDefault(); // Prevent scrolling down the page when space is pressed
-        radenAction(); // Call your function
+        radenAction();
     }
 });
 
 function radenAction() {
     clearAllTimeouts();
     radenCharacter.classList.remove("raden-spin-animation");
-    ctr++;
+
+    totalClicks++;
+    
+    
+    ctr++; //For knowing which audio/animation to play
 
     if (ctr % 2 != 0) {
         playAudio(audioMaitake1);
@@ -136,11 +140,14 @@ function radenAnimation(text) {
     }, 720));
 }
 
+//To collect and clear all timeouts for more responsive clickings
 function clearAllTimeouts() {
     timeouts.forEach(clearTimeout); // Clear all stored timeouts
     timeouts = []; // Reset the array
 }
 
+
+//About modal stuff
 openModal.addEventListener("click", function() {
     triggerModal(modalWindow);
 });
@@ -157,3 +164,5 @@ function triggerModal(modal){
         modal.style.display = "none";
     }
 }
+
+//Backend stuff
