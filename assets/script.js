@@ -10,10 +10,6 @@ let ctr = 0;
 
 let timeouts = [];
 
-window.onload = function () {
-    console.log('Loaded');
-  }
-
 
 // Preload images
 const images = [
@@ -29,6 +25,20 @@ images.forEach(src => {
     const img = new Image();
     img.src = src;
 });
+
+const audioFiles = [
+    ".assets/audio/maitake-1.mp3",
+    ".assets/audio/guru-1.mp3",
+    "assets/audio/guru-end.mp3",
+
+];
+
+audioFiles.forEach(src => {
+    const aud = new Audio();
+    aud.src = src;
+});
+
+
 
 //Interacting
 radenCharacter.addEventListener("click", radenAction);
