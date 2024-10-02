@@ -1,3 +1,30 @@
+import {CounterAPI} from "https://cdn.jsdelivr.net/npm/counterapi@1.88.0/+esm";
+const counter = new CounterAPI();
+let totalCounter = 0;
+
+updateTotalCounter();
+
+function updateTotalCounter() {
+    counter.get("maitake-namespace", "maitake-name").then((res) => {
+        totalCounter = res.Count;
+        clickCounter.textContent = `${totalCounter}`;
+        console.log("total coutner updated");
+    })
+}
+
+function totalCounterAdd() {
+    counter.up("maitake-namespace", "maitake-name").then((res) => {
+        totalCounter = res.Count;
+        console.log("SUCCESSFULA DD?")
+    })
+}
+
+
+window.addEventListener("load", function(){
+    loadingText.style.display = "none";
+    console.log("Load Done")
+})
+
 const radenCharacter = document.querySelector(".raden-image");
 const audioMaitake1 = "./assets/audio/maitake-1.mp3";
 const audioGuru1 = "./assets/audio/guru-1.mp3";
@@ -18,9 +45,14 @@ let myClicks = 0;
 let ctr = 0;
 let timeouts = [];
 
-//fetch yourClicks from localStorage
+//Fetch click counts
 myClicks = localStorage.getItem("myClicks");
-myClicksCounter.textContent = `You: ${myClicks}`;
+if(myClicks != null) {
+    myClicksCounter.textContent = `${myClicks}`;
+}
+
+
+clickCounter.textContent = `Total Clicks: ${totalCounter}`;
 
 // Preload images and audio
 const images = [
@@ -51,12 +83,6 @@ audioFiles.forEach(src => {
 
 
 
-window.addEventListener("load", function(){
-    loadingText.style.display = "none";
-    console.log("Load Done")
-})
-
-
 //Interacting
 radenCharacter.addEventListener("click", radenAction);
 document.addEventListener('keydown', function(event) {
@@ -70,6 +96,7 @@ function radenAction() {
     clearAllTimeouts();
     radenCharacter.classList.remove("raden-spin-animation");
     
+    totalCounterAdd();
     ctr++; //For knowing which audio/animation to play
 
     if (ctr % 2 != 0) {
@@ -92,12 +119,15 @@ function radenAction() {
             playAudio(audioGuru1);
             radenAnimation("ぐるぐる<br>");
         }
+        
     }   
 
     myClicks++; //record your own clicks in localstorage
     localStorage.setItem("myClicks", JSON.stringify(myClicks));
-    myClicksCounter.textContent = `You: ${myClicks}`;
-    console.log(myClicks)
+    myClicksCounter.textContent = `${myClicks}`;
+    
+    totalCounter++;
+    clickCounter.textContent = `${totalCounter}`;
 
 }
 
