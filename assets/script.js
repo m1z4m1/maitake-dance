@@ -1,32 +1,3 @@
-import {CounterAPI} from "https://cdn.jsdelivr.net/npm/counterapi@1.88.0/+esm";
-const counter = new CounterAPI();
-let totalCounter = 0;
-
-updateTotalCounter();
-
-function updateTotalCounter() {
-    counter.get("maitake-namespace", "maitake-name").then((res) => {
-        totalCounter = res.Count;
-        clickCounter.textContent = `${totalCounter}`;
-        console.log("total coutner updated");
-        return totalCounter;
-    })
-}
-
-function totalCounterAdd() {
-    counter.up("maitake-namespace", "maitake-name").then((res) => {
-        totalCounter = res.Count;
-        console.log("+1")
-    })
-}
-
-
-window.addEventListener("load", function(){
-    loadingText.style.display = "none";
-    console.log("Load Done")
-})
-
-
 const radenCharacter = document.querySelector(".raden-image");
 const audioMaitake1 = "./assets/audio/maitake-1.mp3";
 const audioGuru1 = "./assets/audio/guru-1.mp3";
@@ -39,18 +10,10 @@ const loadingText = document.querySelector(".loading-text");
 const modalWindow = document.querySelector(".about-modal");
 const openModal = document.querySelector(".open-modal");
 const closeModal = document.querySelector(".close-modal");
+const clickCounter = document.querySelector(".click-counter-text");
 
-let clickCounter = document.querySelector(".click-counter-text");
-// let myClicksCounter = document.querySelector(".my-click-counter-text");
-
-// let myClicks = 0;
-let ctr = 0;
+let ctr = 0; //For knowing which audio/animation to play
 let timeouts = [];
-
-
-
-clickCounter.textContent = `${totalCounter}`;   
-
 
 // Preload images and audio
 const images = [
@@ -81,7 +44,80 @@ audioFiles.forEach(src => {
 
 
 
-//Interacting
+
+
+
+//This url has the endpoint that updates instantly
+//The actual API getting data is so slow so i used this.
+const url = 'https://api.counterapi.dev/v1/maitake-namespace/maitake-name/up';
+
+//But everytime I reference that url, it increments the counter so it already increments even just opening the site so..
+//This one works the same as the above one but it decrements the counter lol
+const url2 = 'https://api.counterapi.dev/v1/maitake-namespace/maitake-name/down';
+let totalCounter = 0;
+
+async function fetchUpCount() {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data = await response.json(); // Parse the JSON response
+        return (data.count); // Return the count value
+    } catch (error) {
+        console.error('There was a problem fetching the count:', error);
+    }
+}
+
+async function fetchDownCount() {
+    try {
+        const response = await fetch(url2);
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data = await response.json(); // Parse the JSON response
+        return (data.count); // Return the count value
+    } catch (error) {
+        console.error('There was a problem fetching the count:', error);
+    }
+}
+
+//Fetch and display the count from JSON
+function updateFromFetch() {
+    fetchUpCount().then(count => {
+        totalCounter = count; // Fetch the actual count after the Promise resolves
+        clickCounter.textContent = totalCounter;   
+        console.log("update from up: " + count);
+    });
+}
+
+function updateFromFetchDown() {
+    fetchDownCount().then(count => {
+        totalCounter = count; // Fetch the actual count after the Promise resolves
+        clickCounter.textContent = totalCounter;   
+        console.log("update from down: " + count);
+    });
+}
+
+function fetchActualCount() {
+    //there's a time lag between two so inaccurate results shows when there's no setTimeout
+    setTimeout(function(){
+        fetchDownCount();
+    }, 600)
+    
+    setTimeout(function(){
+        updateFromFetch();
+    }, 1000)
+}
+
+setInterval(fetchActualCount() , 500); // Optionally, update the count every 1min
+
+
+
+
+
+
+//The button basically
 radenCharacter.addEventListener("click", radenAction);
 document.addEventListener('keydown', function(event) {
     if (event.code === 'Space') {
@@ -94,8 +130,7 @@ function radenAction() {
     clearAllTimeouts();
     radenCharacter.classList.remove("raden-spin-animation");
     
-    totalCounterAdd();
-    ctr++; //For knowing which audio/animation to play
+    ctr++; 
 
     if (ctr % 2 != 0) {
         playAudio(audioMaitake1);
@@ -120,12 +155,9 @@ function radenAction() {
         
     }   
 
-    // myClicks++; //record your own clicks in localstorage
-    // localStorage.setItem("myClicks", JSON.stringify(myClicks));
-    // myClicksCounter.textContent = `${myClicks}`;
-
     totalCounter++;
-    clickCounter.textContent = `${totalCounter}`;
+    clickCounter.textContent = totalCounter;
+    fetchUpCount();
 
 }
 
@@ -162,24 +194,6 @@ function radenAnimation(text) {
 
     timeouts.push(setTimeout(function(){
         bigText.innerHTML = "";
-
-        async function checkCounter() {
-            let tempCounter;
-            try {
-                const res = await counter.get("maitake-namespace", "maitake-name");
-                tempCounter = res.Count; // Now tempCounter is assigned after the promise resolves
-        
-                if (tempCounter >= totalCounter) {
-                    console.log("HM");
-                }
-        
-                console.log(tempCounter); // This will log the correct value
-            } catch (error) {
-                console.error("Error fetching counter:", error); // Handle any potential errors
-            }
-        }
-        
-        checkCounter(); 
     }, 720));
     
 }
@@ -208,4 +222,10 @@ function triggerModal(modal){
         modal.style.display = "none";
     }
 }
+
+
+window.addEventListener("load", function(){
+    console.log("Load Done");
+    fetchActualCount();
+})
 
