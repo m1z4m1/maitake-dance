@@ -47,12 +47,7 @@ let clickCounter = document.querySelector(".click-counter-text");
 let ctr = 0;
 let timeouts = [];
 
-//Fetch click counts
-// myClicks = localStorage.getItem("myClicks");
 
-// if(myClicks != null) {
-//     myClicksCounter.textContent = `${myClicks}`;
-// }
 
 clickCounter.textContent = `${totalCounter}`;   
 
