@@ -16,12 +16,12 @@ let timeouts = [];
 
 // Preload images and audio
 const images = [
-    "assets/images/raden.png",
-    "assets/images/raden-l-1.png",
-    "assets/images/raden-l-2.png",
-    "assets/images/raden-r-1.png",
-    "assets/images/raden-r-2.png",
-    "assets/images/raden-f.png"
+    "assets/images/raden.webp",
+    "assets/images/raden-l-1.webp",
+    "assets/images/raden-l-2.webp",
+    "assets/images/raden-r-1.webp",
+    "assets/images/raden-r-2.webp",
+    "assets/images/raden-f.webp"
 ];
 
 images.forEach(src => {
@@ -197,7 +197,7 @@ function radenAnimation(text) {
     }, 480));
 
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "assets/images/raden.webp";
+        radenCharacter.src = "assets/images/raden.webp  ";
     }, 600));
 
     timeouts.push(setTimeout(function(){
