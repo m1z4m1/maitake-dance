@@ -110,9 +110,21 @@ function fetchActualCount() {
     }, 1000)
 }
 
-setInterval(fetchActualCount() , 1000); // Optionally, update the count every 1min
+//Just increment. 
+async function incrementCounter() {
+    try {
+        // Send a request to the URL
+        await fetch(url, {
+            method: 'GET', // You can use GET if that works for the API
+            mode: 'no-cors' // This will prevent CORS issues, but you'll not get a response back
+        });
+        // Note: Using 'no-cors' will make the response opaque, meaning you won't be able to read it
+    } catch (error) {
+        console.error('There was a problem incrementing the counter:', error);
+    }
+}
 
-
+setInterval(fetchActualCount, 30000); // Optionally, update the count every 1min
 
 
 
@@ -144,7 +156,6 @@ function radenAction() {
             playAudio(audioGuruE);
             timeouts.push(setTimeout(function(){
                 radenCharacter.classList.remove("raden-spin-animation");
-                console.log("Spin stop");
             }, 720));
             ctr = 0;
         }
@@ -152,12 +163,12 @@ function radenAction() {
             playAudio(audioGuru1);
             radenAnimation("ぐるぐる<br>");
         }
-        
     }   
 
     totalCounter++;
     clickCounter.textContent = totalCounter;
-    fetchUpCount();
+    incrementCounter();
+    console.log("Spin stop");
 
 }
 
