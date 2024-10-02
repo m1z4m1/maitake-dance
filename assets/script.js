@@ -6,7 +6,6 @@ const spiralImage = document.querySelector(".spiral-img");
 
 let bigText = document.querySelector(".text-el");
 
-const loadingText = document.querySelector(".loading-text");
 const modalWindow = document.querySelector(".about-modal");
 const openModal = document.querySelector(".open-modal");
 const closeModal = document.querySelector(".close-modal");
@@ -236,5 +235,6 @@ function triggerModal(modal){
 window.addEventListener("load", function(){
     console.log("Load Done");
     fetchActualCount();
+    
 })
 
