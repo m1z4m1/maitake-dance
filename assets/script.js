@@ -87,7 +87,6 @@ function updateFromFetch() {
     fetchUpCount().then(count => {
         totalCounter = count; // Fetch the actual count after the Promise resolves
         clickCounter.textContent = totalCounter;   
-        console.log("update from up: " + count);
     });
 }
 
@@ -95,7 +94,6 @@ function updateFromFetchDown() {
     fetchDownCount().then(count => {
         totalCounter = count; // Fetch the actual count after the Promise resolves
         clickCounter.textContent = totalCounter;   
-        console.log("update from down: " + count);
     });
 }
 
