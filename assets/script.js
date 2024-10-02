@@ -9,13 +9,14 @@ function updateTotalCounter() {
         totalCounter = res.Count;
         clickCounter.textContent = `${totalCounter}`;
         console.log("total coutner updated");
+        return totalCounter;
     })
 }
 
 function totalCounterAdd() {
     counter.up("maitake-namespace", "maitake-name").then((res) => {
         totalCounter = res.Count;
-        console.log("SUCCESSFULA DD?")
+        console.log("+1")
     })
 }
 
@@ -24,6 +25,7 @@ window.addEventListener("load", function(){
     loadingText.style.display = "none";
     console.log("Load Done")
 })
+
 
 const radenCharacter = document.querySelector(".raden-image");
 const audioMaitake1 = "./assets/audio/maitake-1.mp3";
@@ -39,20 +41,21 @@ const openModal = document.querySelector(".open-modal");
 const closeModal = document.querySelector(".close-modal");
 
 let clickCounter = document.querySelector(".click-counter-text");
-let myClicksCounter = document.querySelector(".my-click-counter-text");
+// let myClicksCounter = document.querySelector(".my-click-counter-text");
 
-let myClicks = 0;
+// let myClicks = 0;
 let ctr = 0;
 let timeouts = [];
 
 //Fetch click counts
-myClicks = localStorage.getItem("myClicks");
-if(myClicks != null) {
-    myClicksCounter.textContent = `${myClicks}`;
-}
+// myClicks = localStorage.getItem("myClicks");
 
+// if(myClicks != null) {
+//     myClicksCounter.textContent = `${myClicks}`;
+// }
 
-clickCounter.textContent = `Total Clicks: ${totalCounter}`;
+clickCounter.textContent = `${totalCounter}`;   
+
 
 // Preload images and audio
 const images = [
@@ -122,10 +125,10 @@ function radenAction() {
         
     }   
 
-    myClicks++; //record your own clicks in localstorage
-    localStorage.setItem("myClicks", JSON.stringify(myClicks));
-    myClicksCounter.textContent = `${myClicks}`;
-    
+    // myClicks++; //record your own clicks in localstorage
+    // localStorage.setItem("myClicks", JSON.stringify(myClicks));
+    // myClicksCounter.textContent = `${myClicks}`;
+
     totalCounter++;
     clickCounter.textContent = `${totalCounter}`;
 
@@ -164,7 +167,26 @@ function radenAnimation(text) {
 
     timeouts.push(setTimeout(function(){
         bigText.innerHTML = "";
+
+        async function checkCounter() {
+            let tempCounter;
+            try {
+                const res = await counter.get("maitake-namespace", "maitake-name");
+                tempCounter = res.Count; // Now tempCounter is assigned after the promise resolves
+        
+                if (tempCounter >= totalCounter) {
+                    console.log("HM");
+                }
+        
+                console.log(tempCounter); // This will log the correct value
+            } catch (error) {
+                console.error("Error fetching counter:", error); // Handle any potential errors
+            }
+        }
+        
+        checkCounter(); 
     }, 720));
+    
 }
 
 //To collect and clear all timeouts for more responsive clickings
@@ -192,4 +214,3 @@ function triggerModal(modal){
     }
 }
 
-//Backend stuff
