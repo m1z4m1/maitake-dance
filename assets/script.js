@@ -110,7 +110,7 @@ function fetchActualCount() {
     }, 1000)
 }
 
-setInterval(fetchActualCount() , 500); // Optionally, update the count every 1min
+setInterval(fetchActualCount() , 1000); // Optionally, update the count every 1min
 
 
 
