@@ -141,7 +141,7 @@ body {
         height: 1.2em;
         
     }
-        .small-text img {
+        .small-text a img {
             object-fit: contain;
             margin: auto;
             margin-left: 0;
