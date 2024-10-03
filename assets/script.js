@@ -144,7 +144,7 @@ async function runDelayedLoop(start, end, delayTime) {
 
 //To increment with delays between each iteration
 async function checkAndUpdate() {
-    let fetchedTemp = await fetchDownCount(); // Assuming fetchDownCount is a promise-based function
+    let fetchedTemp = await fetchActualCount(); // Assuming fetchDownCount is a promise-based function
     if (fetchedTemp > totalCounter) {
         const incrementAmount = fetchedTemp - totalCounter;
         await runDelayedLoop(totalCounter, fetchedTemp, 100); // 500ms delay between each increment
