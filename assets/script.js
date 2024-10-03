@@ -46,14 +46,15 @@ audioFiles.forEach(src => {
 
 
 
-//This url has the endpoint that updates instantly
+//This url is the API endpoint that updates instantly
 //The actual API getting data is so slow so i used this.
 const url = 'https://api.counterapi.dev/v1/maitake-namespace/maitake-name/up';
 
-//But everytime I reference that url, it increments the counter so it already increments even just opening the site so..
-//This one works the same as the above one but it decrements the counter lol
+//But everytime I reference that url, it increments the counter so it already increments even just opening the site so I need a workaround..
+//This one works the same as the above one but it decrements the counter so it will work to cancel out the increment lmao
 const url2 = 'https://api.counterapi.dev/v1/maitake-namespace/maitake-name/down';
-let totalCounter = 0;
+
+let totalCounter = 0; //
 
 async function fetchUpCount() {
     try {
@@ -121,9 +122,39 @@ async function incrementCounter() {
     }
 }
 
-setInterval(fetchActualCount, 30000); // Optionally, update the count every 1min
+// setInterval(fetchActualCount, 5000); // Optionally, update the count every 1min
 
 
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function runDelayedLoop(start, end, delayTime) {
+    for (let i = start; i <= end; i++) {
+        // Execute the loop body
+        totalCounter++;
+        // console.log(totalCounter);
+        clickCounter.textContent = totalCounter;
+
+        // Wait for the specified delay before the next iteration
+        await delay(delayTime);
+    }
+}
+
+//To increment with delays between each iteration
+async function checkAndUpdate() {
+    let fetchedTemp = await fetchDownCount(); // Assuming fetchDownCount is a promise-based function
+    if (fetchedTemp > totalCounter) {
+        const incrementAmount = fetchedTemp - totalCounter;
+        await runDelayedLoop(totalCounter, fetchedTemp, 100); // 500ms delay between each increment
+    } else {
+        console.log("Not updating " + totalCounter);
+    }
+}
+
+// Repeatedly check every 5 seconds
+setInterval(checkAndUpdate, 5000);
 
 
 //The button basically
@@ -140,6 +171,9 @@ function radenAction() {
     radenCharacter.classList.remove("raden-spin-animation");
     
     ctr++; 
+    totalCounter++;
+    clickCounter.textContent = totalCounter;
+    incrementCounter();
 
     if (ctr % 2 != 0) {
         playAudio(audioMaitake1);
@@ -162,10 +196,7 @@ function radenAction() {
         }
     }   
 
-    totalCounter++;
-    clickCounter.textContent = totalCounter;
-    incrementCounter();
-    console.log("Spin stop");
+
 
 }
 
