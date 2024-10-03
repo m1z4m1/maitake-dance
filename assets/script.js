@@ -16,12 +16,12 @@ let timeouts = [];
 
 // Preload images and audio
 const images = [
-    "assets/images/raden.png",
-    "assets/images/raden-l-1.png",
-    "assets/images/raden-l-2.png",
-    "assets/images/raden-r-1.png",
-    "assets/images/raden-r-2.png",
-    "assets/images/raden-f.png"
+    "assets/images/raden.webp",
+    "assets/images/raden-l-1.webp",
+    "assets/images/raden-l-2.webp",
+    "assets/images/raden-r-1.webp",
+    "assets/images/raden-r-2.webp",
+    "assets/images/raden-f.webp"
 ];
 
 images.forEach(src => {
@@ -42,22 +42,15 @@ audioFiles.forEach(src => {
 });
 
 
-
-
-<<<<<<< HEAD
 //This url is the API endpoint that updates instantly
-=======
-
-
-//This url has the endpoint that updates instantly
->>>>>>> parent of 19842d1 (clean files and update counter)
 //The actual API getting data is so slow so i used this.
 const url = 'https://api.counterapi.dev/v1/maitake-namespace/maitake-name/up';
 
-//But everytime I reference that url, it increments the counter so it already increments even just opening the site so..
-//This one works the same as the above one but it decrements the counter lol
+//But everytime I reference that url, it increments the counter so it already increments even just opening the site so I need a workaround..
+//This one works the same as the above one but it decrements the counter so it will work to cancel out the increment lmao
 const url2 = 'https://api.counterapi.dev/v1/maitake-namespace/maitake-name/down';
-let totalCounter = 0;
+
+let totalCounter = 0; //
 
 async function fetchUpCount() {
     try {
@@ -102,6 +95,7 @@ function updateFromFetchDown() {
 
 function fetchActualCount() {
     //there's a time lag between two so inaccurate results shows when there's no setTimeout
+    
     setTimeout(function(){
         fetchDownCount();
     }, 600)
@@ -109,7 +103,10 @@ function fetchActualCount() {
     setTimeout(function(){
         updateFromFetch();
     }, 1000)
+    
 }
+
+
 
 //Just increment. 
 async function incrementCounter() {
@@ -125,43 +122,13 @@ async function incrementCounter() {
     }
 }
 
-setInterval(fetchActualCount, 30000); // Optionally, update the count every 1min
+// setInterval(fetchActualCount, 5000); // Optionally, update the count every 1min
 
 
 
-<<<<<<< HEAD
-// function delay(ms) {
-//     return new Promise(resolve => setTimeout(resolve, ms));
-// }
+// Repeatedly check every 5 seconds
+// setInterval(checkAndUpdate, 3000);
 
-// async function runDelayedLoop(start, end, delayTime) {
-//     for (let i = start; i <= end; i++) {
-//         // Execute the loop body
-//         totalCounter++;
-//         // console.log(totalCounter);
-//         clickCounter.textContent = totalCounter;
-
-//         // Wait for the specified delay before the next iteration
-//         await delay(delayTime);
-//     }
-// }
-
-// //To increment with delays between each iteration
-// async function checkAndUpdate() {
-//     let fetchedTemp = await fetchActualCount(); // Assuming fetchDownCount is a promise-based function
-//     if (fetchedTemp > totalCounter) {
-//         const incrementAmount = fetchedTemp - totalCounter;
-//         await runDelayedLoop(totalCounter, fetchedTemp, 100); // 500ms delay between each increment
-//     } else {
-//         console.log("Not updating " + totalCounter);
-//     }
-// }
-
-// // Repeatedly check every 5 seconds
-// setInterval(checkAndUpdate, 5000);
-
-=======
->>>>>>> parent of 19842d1 (clean files and update counter)
 
 //The button basically
 radenCharacter.addEventListener("click", radenAction);
@@ -177,6 +144,9 @@ function radenAction() {
     radenCharacter.classList.remove("raden-spin-animation");
     
     ctr++; 
+    totalCounter++;
+    clickCounter.textContent = totalCounter;
+    incrementCounter();
 
     if (ctr % 2 != 0) {
         playAudio(audioMaitake1);
@@ -184,7 +154,7 @@ function radenAction() {
     }
     else if (ctr % 2 === 0) {
         if (ctr === 8) {
-            radenCharacter.src = "assets/images/raden-f.png"
+            radenCharacter.src = "assets/images/raden-f.webp"
             radenCharacter.classList.add("raden-spin-animation");
             bigText.innerHTML = "";
             playAudio(audioGuruE);
@@ -199,10 +169,7 @@ function radenAction() {
         }
     }   
 
-    totalCounter++;
-    clickCounter.textContent = totalCounter;
-    incrementCounter();
-    console.log("Spin stop");
+
 
 }
 
@@ -212,29 +179,29 @@ function playAudio(src) {
 }
 
 function radenAnimation(text) {
-    radenCharacter.src = "assets/images/raden-l-1.png";
+    radenCharacter.src = "assets/images/raden-l-1.webp";
     
     // Use timeouts and store their IDs in the array
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "assets/images/raden-l-2.png";
+        radenCharacter.src = "assets/images/raden-l-2.webp";
         bigText.innerHTML = text;
     }, 120));
     
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "assets/images/raden.png";
+        radenCharacter.src = "assets/images/raden.webp";
     }, 240));
 
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "assets/images/raden-r-1.png";
+        radenCharacter.src = "assets/images/raden-r-1.webp";
         bigText.innerHTML += text;
     }, 360));
     
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "assets/images/raden-r-2.png";
+        radenCharacter.src = "assets/images/raden-r-2.webp";
     }, 480));
 
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "assets/images/raden.png";
+        radenCharacter.src = "assets/images/raden.webp  ";
     }, 600));
 
     timeouts.push(setTimeout(function(){
@@ -274,3 +241,4 @@ window.addEventListener("load", function(){
     fetchActualCount();
     
 })
+
