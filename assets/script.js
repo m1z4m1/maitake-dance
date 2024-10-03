@@ -184,7 +184,7 @@ function radenAction() {
     }
     else if (ctr % 2 === 0) {
         if (ctr === 8) {
-            radenCharacter.src = "assets/images/raden-f.webp"
+            radenCharacter.src = "assets/images/raden-f.png"
             radenCharacter.classList.add("raden-spin-animation");
             bigText.innerHTML = "";
             playAudio(audioGuruE);
@@ -212,29 +212,29 @@ function playAudio(src) {
 }
 
 function radenAnimation(text) {
-    radenCharacter.src = "assets/images/raden-l-1.webp";
+    radenCharacter.src = "assets/images/raden-l-1.png";
     
     // Use timeouts and store their IDs in the array
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "assets/images/raden-l-2.webp";
+        radenCharacter.src = "assets/images/raden-l-2.png";
         bigText.innerHTML = text;
     }, 120));
     
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "assets/images/raden.webp";
+        radenCharacter.src = "assets/images/raden.png";
     }, 240));
 
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "assets/images/raden-r-1.webp";
+        radenCharacter.src = "assets/images/raden-r-1.png";
         bigText.innerHTML += text;
     }, 360));
     
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "assets/images/raden-r-2.webp";
+        radenCharacter.src = "assets/images/raden-r-2.png";
     }, 480));
 
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "assets/images/raden.webp";
+        radenCharacter.src = "assets/images/raden.png";
     }, 600));
 
     timeouts.push(setTimeout(function(){
