@@ -126,35 +126,35 @@ async function incrementCounter() {
 
 
 
-function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+// function delay(ms) {
+//     return new Promise(resolve => setTimeout(resolve, ms));
+// }
 
-async function runDelayedLoop(start, end, delayTime) {
-    for (let i = start; i <= end; i++) {
-        // Execute the loop body
-        totalCounter++;
-        // console.log(totalCounter);
-        clickCounter.textContent = totalCounter;
+// async function runDelayedLoop(start, end, delayTime) {
+//     for (let i = start; i <= end; i++) {
+//         // Execute the loop body
+//         totalCounter++;
+//         // console.log(totalCounter);
+//         clickCounter.textContent = totalCounter;
 
-        // Wait for the specified delay before the next iteration
-        await delay(delayTime);
-    }
-}
+//         // Wait for the specified delay before the next iteration
+//         await delay(delayTime);
+//     }
+// }
 
-//To increment with delays between each iteration
-async function checkAndUpdate() {
-    let fetchedTemp = await fetchActualCount(); // Assuming fetchDownCount is a promise-based function
-    if (fetchedTemp > totalCounter) {
-        const incrementAmount = fetchedTemp - totalCounter;
-        await runDelayedLoop(totalCounter, fetchedTemp, 100); // 500ms delay between each increment
-    } else {
-        console.log("Not updating " + totalCounter);
-    }
-}
+// //To increment with delays between each iteration
+// async function checkAndUpdate() {
+//     let fetchedTemp = await fetchActualCount(); // Assuming fetchDownCount is a promise-based function
+//     if (fetchedTemp > totalCounter) {
+//         const incrementAmount = fetchedTemp - totalCounter;
+//         await runDelayedLoop(totalCounter, fetchedTemp, 100); // 500ms delay between each increment
+//     } else {
+//         console.log("Not updating " + totalCounter);
+//     }
+// }
 
-// Repeatedly check every 5 seconds
-setInterval(checkAndUpdate, 5000);
+// // Repeatedly check every 5 seconds
+// setInterval(checkAndUpdate, 5000);
 
 
 //The button basically
