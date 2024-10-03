@@ -107,6 +107,27 @@ function fetchActualCount() {
 }
 
 
+async function getCountValue() {
+    const count = await fetchUpCount(); // Wait for fetchUpCount to resolve
+    return count; // Return the count value
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function refreshActualCount() {
+    let tempActualCount = await getCountValue();
+    fetchDownCount();
+    
+    for (let i = totalCounter; i < tempActualCount; i++) {
+            await delay(50);
+            totalCounter++;
+            clickCounter.textContent = totalCounter;
+    }
+    // console.log(tempActualCount);
+}
+
 
 //Just increment. 
 async function incrementCounter() {
@@ -122,12 +143,9 @@ async function incrementCounter() {
     }
 }
 
-// setInterval(fetchActualCount, 5000); // Optionally, update the count every 1min
 
 
 
-// Repeatedly check every 5 seconds
-// setInterval(checkAndUpdate, 3000);
 
 
 //The button basically
@@ -239,6 +257,7 @@ function triggerModal(modal){
 window.addEventListener("load", function(){
     console.log("Load Done");
     fetchActualCount();
-    
+    setInterval(refreshActualCount, 2500); // Optionally, update the count every 1min
+
 })
 
