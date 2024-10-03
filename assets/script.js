@@ -16,12 +16,12 @@ let timeouts = [];
 
 // Preload images and audio
 const images = [
-    "assets/images/raden.webp",
-    "assets/images/raden-l-1.webp",
-    "assets/images/raden-l-2.webp",
-    "assets/images/raden-r-1.webp",
-    "assets/images/raden-r-2.webp",
-    "assets/images/raden-f.webp"
+    "assets/images/raden.png",
+    "assets/images/raden-l-1.png",
+    "assets/images/raden-l-2.png",
+    "assets/images/raden-r-1.png",
+    "assets/images/raden-r-2.png",
+    "assets/images/raden-f.png"
 ];
 
 images.forEach(src => {
@@ -44,15 +44,20 @@ audioFiles.forEach(src => {
 
 
 
+<<<<<<< HEAD
 //This url is the API endpoint that updates instantly
+=======
+
+
+//This url has the endpoint that updates instantly
+>>>>>>> parent of 19842d1 (clean files and update counter)
 //The actual API getting data is so slow so i used this.
 const url = 'https://api.counterapi.dev/v1/maitake-namespace/maitake-name/up';
 
-//But everytime I reference that url, it increments the counter so it already increments even just opening the site so I need a workaround..
-//This one works the same as the above one but it decrements the counter so it will work to cancel out the increment lmao
+//But everytime I reference that url, it increments the counter so it already increments even just opening the site so..
+//This one works the same as the above one but it decrements the counter lol
 const url2 = 'https://api.counterapi.dev/v1/maitake-namespace/maitake-name/down';
-
-let totalCounter = 0; //
+let totalCounter = 0;
 
 async function fetchUpCount() {
     try {
@@ -120,10 +125,11 @@ async function incrementCounter() {
     }
 }
 
-// setInterval(fetchActualCount, 5000); // Optionally, update the count every 1min
+setInterval(fetchActualCount, 30000); // Optionally, update the count every 1min
 
 
 
+<<<<<<< HEAD
 // function delay(ms) {
 //     return new Promise(resolve => setTimeout(resolve, ms));
 // }
@@ -154,6 +160,8 @@ async function incrementCounter() {
 // // Repeatedly check every 5 seconds
 // setInterval(checkAndUpdate, 5000);
 
+=======
+>>>>>>> parent of 19842d1 (clean files and update counter)
 
 //The button basically
 radenCharacter.addEventListener("click", radenAction);
@@ -169,9 +177,6 @@ function radenAction() {
     radenCharacter.classList.remove("raden-spin-animation");
     
     ctr++; 
-    totalCounter++;
-    clickCounter.textContent = totalCounter;
-    incrementCounter();
 
     if (ctr % 2 != 0) {
         playAudio(audioMaitake1);
@@ -194,7 +199,10 @@ function radenAction() {
         }
     }   
 
-
+    totalCounter++;
+    clickCounter.textContent = totalCounter;
+    incrementCounter();
+    console.log("Spin stop");
 
 }
 
@@ -226,7 +234,7 @@ function radenAnimation(text) {
     }, 480));
 
     timeouts.push(setTimeout(function(){
-        radenCharacter.src = "assets/images/raden.webp  ";
+        radenCharacter.src = "assets/images/raden.webp";
     }, 600));
 
     timeouts.push(setTimeout(function(){

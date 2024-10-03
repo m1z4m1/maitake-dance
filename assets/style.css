@@ -209,6 +209,26 @@ body {
     }
 
 
+/* .loading-container {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1em 3em;
+    overflow: hidden;
+    border-radius: 36px;
+    border: #ed7a38 solid 2px;
+    background-color: rgba(255, 255, 255, 0.808);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    
+}
+    .loading-container span {
+
+    } */
+
+
 @media only screen and (max-width: 600px) {
     body {
         width: 100%;
