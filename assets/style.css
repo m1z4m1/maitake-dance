@@ -55,7 +55,7 @@ body {
 
 
 .raden-container:hover {
-    height: 55vh;
+    height: 53vh;
 }
 
 .raden-image {
@@ -209,24 +209,14 @@ body {
     }
 
 
-/* .loading-container {
+.toggle-container {
     display: flex;
-    position: absolute;
     justify-content: center;
     align-items: center;
-
-    padding: 1em 3em;
-    overflow: hidden;
-    border-radius: 36px;
-    border: #ed7a38 solid 2px;
-    background-color: rgba(255, 255, 255, 0.808);
-    backdrop-filter: blur(10px);
-    z-index: 9999;
-    
+    height: 1em;
+    color: #ed7a38;
+    accent-color: #ed7a38;
 }
-    .loading-container span {
-
-    } */
 
 
 @media only screen and (max-width: 600px) {

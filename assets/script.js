@@ -3,6 +3,7 @@ const audioMaitake1 = "./assets/audio/maitake-1.mp3";
 const audioGuru1 = "./assets/audio/guru-1.mp3";
 const audioGuruE = "./assets/audio/guru-end.mp3";
 const spiralImage = document.querySelector(".spiral-img");
+const speedToggle = document.querySelector("#speed-toggle")
 
 let bigText = document.querySelector(".text-el");
 
@@ -106,6 +107,7 @@ function fetchActualCount() {
     
 }
 
+fetchActualCount();
 
 async function getCountValue() {
     const count = await fetchUpCount(); // Wait for fetchUpCount to resolve
@@ -144,16 +146,46 @@ async function incrementCounter() {
 }
 
 
+//button debounce
+function throttle(func, delay, immediate = true) {
+    let lastCall = 0;
+    return function(...args) {
+        const now = new Date().getTime();
+        
+        if (immediate && now - lastCall >= delay) {
+            lastCall = now;
+            return func.apply(this, args);
+        }
 
+        // If immediate is false or subsequent calls are too soon, ignore them
+        if (now - lastCall >= delay) {
+            lastCall = now;
+            return func.apply(this, args);
+        }
+    };
+}
 
+const throttledRadenActionSlow = throttle(radenAction, 760, true);
+const throttledRadenActionFast = throttle(radenAction, 200, true);
 
+function getCurrentAction() {
+    if (speedToggle.checked) {
+        return throttledRadenActionSlow;  // Return slow action if checked
+    } else {
+        return throttledRadenActionFast;  // Return fast action if unchecked
+    }
+}
 
 //The button basically
-radenCharacter.addEventListener("click", radenAction);
+//mouse click
+radenCharacter.addEventListener("click", function(){
+    getCurrentAction()();
+});
+//keyboard press
 document.addEventListener('keydown', function(event) {
     if (event.code === 'Space') {
         event.preventDefault(); // Prevent scrolling down the page when space is pressed
-        radenAction();
+        getCurrentAction()();
     }
 });
 

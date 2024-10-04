@@ -1,1 +1,0 @@
-import './assets/script.js';
